@@ -1,8 +1,10 @@
+require('./config/config');
 var express = require('express');
 var path = require('path');
 
+var mongoose = require('./db/mongoose');
+
 var app = express();
-var port = process.env.PORT || 3000;
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -10,7 +12,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 
-
-app.listen(port, () => {
-  console.log('server is running on port 3000');
+app.listen(process.env.PORT, () => {
+  console.log('server is running on port', process.env.PORT);
 })
