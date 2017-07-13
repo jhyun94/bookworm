@@ -6,7 +6,7 @@ var UserSchema = new mongoose.Schema({
     required: true,
     trim: true,
     unique: true,
-    type: String
+    type: String,
     validate: (value) => {
       return validator.isEmail(value);
     },
@@ -18,9 +18,11 @@ var UserSchema = new mongoose.Schema({
   },
   tokens: [{
     token: {
+      type: String,
       required: true
     },
     auth: {
+      type: String,
       required: true
     }
   }]

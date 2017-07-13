@@ -5,6 +5,7 @@ var bodyParser = require('body-parser');
 var _ = require('lodash');
 
 var mongoose = require('./db/mongoose');
+var {User} = require('./models/user');
 
 var app = express();
 app.use(bodyParser.json());
@@ -14,8 +15,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.post('/users/new', (req,res) => {
   var body = _.pick(req.body, ['email', 'password']);
-  
-  res.redirect('/index.html')
+  var user = new User(body);
+  user.save().then((user) => {
+    res.send(user);
+  }).catch((err) => {
+    res.status(400).send(err);
+  })
+  // res.redirect('/index.html')
 })
 
 
