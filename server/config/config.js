@@ -6,3 +6,4 @@ if (env === 'development') {
   process.env.MONGODB_URI = 'mongodb://localhost/bookworm';
   process.env.JWT_SECRET = 'fmdkalf123'
 }
+
