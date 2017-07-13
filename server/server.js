@@ -13,6 +13,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+//create new user
 app.post('/users/new', (req,res) => {
   var body = _.pick(req.body, ['email', 'password']);
   var user = new User(body);
