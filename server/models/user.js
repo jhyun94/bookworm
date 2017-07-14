@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const _ = require('lodash');
 
 var UserSchema = new mongoose.Schema({
   email: {
@@ -55,6 +56,12 @@ UserSchema.methods.generateAuthToken = function(){
   })
 }
 
+UserSchema.methods.toJSON = function(){
+  var user = this;
+  var userObject = user.toObject();
+
+  return _.pick(userObject, ['email', '_id']);
+}
 var User = mongoose.model('User', UserSchema)
 
 
