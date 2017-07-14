@@ -62,6 +62,22 @@ UserSchema.methods.toJSON = function(){
 
   return _.pick(userObject, ['email', '_id']);
 }
+
+UserSchema.statics.findByCredentials = function(email, password){
+  var User = this;
+  return User.findOne({email}).then((user) => {
+    return new Promise((resolve, reject) => {
+      bcrypt.compare(password, user.password, (err, res) => {
+      if (res === true){
+        return resolve(user);
+      } else {
+          return reject();
+        }
+      })
+    })
+
+  })
+}
 var User = mongoose.model('User', UserSchema)
 
 
