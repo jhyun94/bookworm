@@ -25,7 +25,7 @@ app.post('/users', (req,res) => {
     res.status(400).send();
   })
 })
-
+//user login
 app.post('/users/login',  (req, res) => {
   var body = _.pick(req.body, ['email', 'password']);
   User.findByCredentials(body.email, body.password).then((user) => {
@@ -34,6 +34,19 @@ app.post('/users/login',  (req, res) => {
     })
   }).catch((e) => {
     res.status(404).send();
+  })
+})
+//user logout
+app.delete('/users/:id', (req, res) => {
+  var id = req.params.id;
+  var token = req.header('x-auth');
+  User.findById(id).then((user) => {
+    user.removeToken(token).then((user) => {
+      console.log(user);
+      res.send(user);
+    })
+  }).catch((e) => {
+    res.status(400).send();
   })
 })
 
