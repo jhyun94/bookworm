@@ -1,0 +1,23 @@
+html, body {
+  padding: 0;
+  margin: 0;
+}
+
+.container {
+  margin: 0 auto;
+  padding: 0 auto;
+}
+
+.title {
+  text-align: center;
+  font-size: 40px; 
+  padding: 20px;
+}
+
+.background-green {
+  background-color: #05B836;
+}
+
+.color-white {
+  color: #fff;
+}
