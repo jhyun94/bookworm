@@ -1,0 +1,19 @@
+//event for signup
+$('#main-form').on('submit', function(e){
+  e.preventDefault();
+  var formData = {
+    email: $('input[name=email]').val(),
+    password: $('input[name=password]').val()
+  }
+  $.ajax({
+    url: './users',
+    method: 'POST',
+    data: formData,
+    success: function(){
+      window.location.href = './book.html'
+    },
+    error: function(){
+      alert('err');
+    }
+  })
+})
