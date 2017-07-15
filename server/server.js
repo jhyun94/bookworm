@@ -6,6 +6,7 @@ var _ = require('lodash');
 
 var mongoose = require('./db/mongoose');
 var {User} = require('./models/user');
+var {authenticate} = require('./middleware/authenticate');
 
 var app = express();
 app.use(bodyParser.json());
@@ -50,7 +51,10 @@ app.delete('/users/:id', (req, res) => {
   })
 })
 
-
+//users page/dashboard
+app.get('/users/:id', authenticate, (req, res) => {
+  res.send(req.user);
+})
 
 app.listen(process.env.PORT, () => {
   console.log('server is running on port', process.env.PORT);

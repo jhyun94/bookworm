@@ -63,6 +63,7 @@ UserSchema.methods.toJSON = function(){
   return _.pick(userObject, ['email', '_id']);
 }
 
+
 UserSchema.statics.findByCredentials = function(email, password){
   var User = this;
   return User.findOne({email}).then((user) => {
@@ -79,6 +80,16 @@ UserSchema.statics.findByCredentials = function(email, password){
   })
 }
 
+UserSchema.statics.findByToken = function(token){
+  var decoded = jwt.verify(token, process.env.JWT_SECRET);
+  User = this;
+  return User.findById(decoded.id).then((user) => {
+    if (!user) {
+      return new Promise.reject();
+    }
+    return user;
+  })
+}
 UserSchema.methods.removeToken = function(token){
   var user = this;
   return User.update({
@@ -87,7 +98,6 @@ UserSchema.methods.removeToken = function(token){
     }
   })
 }
-
 
 var User = mongoose.model('User', UserSchema)
 
