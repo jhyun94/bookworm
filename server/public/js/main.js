@@ -9,7 +9,8 @@ $('#main-form').on('submit', function(e){
     url: './users',
     method: 'POST',
     data: formData,
-    success: function(){
+    success: function(response, status, xhr){
+      localStorage.setItem('x-auth', xhr.getResponseHeader('x-auth'));
       window.location.href = './book.html'
     },
     error: function(){
@@ -17,3 +18,4 @@ $('#main-form').on('submit', function(e){
     }
   })
 })
+
