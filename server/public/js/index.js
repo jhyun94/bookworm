@@ -11,6 +11,7 @@ $('#main-form').on('submit', function(e){
     data: formData,
     success: function(response, status, xhr){
       localStorage.setItem('x-auth', xhr.getResponseHeader('x-auth'));
+      localStorage.setItem('x-id', response._id);
       window.location.href = './book.html'
     },
     error: function(){
